@@ -1,0 +1,23 @@
+{
+  "name": "dynamodb-seed-migration-scripts",
+  "version": "1.0.0",
+  "description": "The prototype of dynamoDB seed and migration scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedchenkoroman/dynamodb-seed-migration-scripts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedchenkoroman/dynamodb-seed-migration-scripts/issues"
+  },
+  "homepage": "https://github.com/pedchenkoroman/dynamodb-seed-migration-scripts#readme",
+  "dependencies": {
+    "typescript": "^5.6.3"
+  }
+}
