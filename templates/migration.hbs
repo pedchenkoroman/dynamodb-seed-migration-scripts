@@ -1,0 +1,25 @@
+import {
+  ExecuteStatementCommandOutput,
+  QueryCommandOutput,
+  ScanCommandOutput,
+} from '@aws-sdk/lib-dynamodb';
+
+import { Migrator } from '../migrator';
+import type { Operations } from '../migrator';
+
+const operations: Operations = {
+  read(): Promise<QueryCommandOutput | ScanCommandOutput | ExecuteStatementCommandOutput> {
+    return Promise.resolve({ $metadata: {} });
+  },
+  transform<T>(data: T[]): T[] {
+    return [];
+  },
+  write<T>(data: T): Promise<void> {
+    return Promise.resolve();
+  },
+};
+
+export const migrator = new Migrator({
+    scriptName: '{{scriptName}}',
+    scriptTable: '',
+}, operations);

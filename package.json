@@ -1,0 +1,37 @@
+{
+  "type": "module",
+  "name": "dynamodb-seed-migration-scripts",
+  "version": "1.0.0",
+  "description": "The prototype of dynamoDB seed and migration scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "plop":"cross-env NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts",
+    "foo": "cross-env NODE_OPTIONS='--import tsx' AWS_PROFILE=roman.pedchenko.88 AWS_REGION=eu-central-1 node foo.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedchenkoroman/dynamodb-seed-migration-scripts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedchenkoroman/dynamodb-seed-migration-scripts/issues"
+  },
+  "homepage": "https://github.com/pedchenkoroman/dynamodb-seed-migration-scripts#readme",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.670.0",
+    "@aws-sdk/lib-dynamodb": "^3.670.0",
+    "nanospinner": "^1.1.0",
+    "ora": "^8.1.0",
+    "plop": "^4.0.1",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "cross-env": "^7.0.3",
+    "prettier": "^3.3.3",
+    "tsx": "^4.19.1"
+  }
+}
