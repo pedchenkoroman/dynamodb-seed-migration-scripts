@@ -5,9 +5,8 @@
   "description": "The prototype of dynamoDB seed and migration scripts",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "plop":"cross-env NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts",
-    "foo": "cross-env NODE_OPTIONS='--import tsx' AWS_PROFILE=roman.pedchenko.88 AWS_REGION=eu-central-1 node foo.ts"
+    "plop": "cross-env NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts",
+    "debug": "cross-env NODE_OPTIONS='--import tsx' node path-to-a-script"
   },
   "repository": {
     "type": "git",
