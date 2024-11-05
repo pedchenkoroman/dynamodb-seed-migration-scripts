@@ -31,7 +31,7 @@ export class Migrator {
       this.spinner.succeed(`The script has finished successfully`);
     } catch (e) {
       console.error('Method run: ', e);
-      this.spinner.fail('Something went wrong; please see logs!');
+      this.spinner.fail(`Something went wrong; please see logs! ${e}`);
     }
   }
 

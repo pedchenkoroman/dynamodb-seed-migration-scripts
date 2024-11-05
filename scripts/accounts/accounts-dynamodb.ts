@@ -11,7 +11,7 @@ const documentClient = DynamoDBDocumentClient.from(ddbClient, {
   marshallOptions: { convertEmptyValues: true, removeUndefinedValues: true },
 });
 
-export const scriptTracker = new DynamodbScriptTracker(documentClient, {
+const scriptTracker = new DynamodbScriptTracker(documentClient, {
   scriptName: 'accounts-dynamodb',
   scriptStore: 'migration-seed-scripts-table',
 });
@@ -22,7 +22,10 @@ const operations: Operations = {
       TableName: 'accounts',
       KeyConditionExpression: '#type = :type',
       ExpressionAttributeValues: {
-        '#type': 'user',
+        ':type': 'user',
+      },
+      ExpressionAttributeNames: {
+        '#type': 'type',
       },
     });
     const { Items = [], LastEvaluatedKey } = await documentClient.send(queryCommand);
@@ -41,6 +44,9 @@ const operations: Operations = {
             ConditionExpression: '#type = :type',
             ExpressionAttributeValues: {
               ':type': modifiedItem.type,
+            },
+            ExpressionAttributeNames: {
+              '#type': 'type',
             },
           },
         })),
