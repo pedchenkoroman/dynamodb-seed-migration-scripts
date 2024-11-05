@@ -1,25 +1,37 @@
-import {
-  ExecuteStatementCommandOutput,
-  QueryCommandOutput,
-  ScanCommandOutput,
-} from '@aws-sdk/lib-dynamodb';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, QueryCommand, TransactWriteCommand } from '@aws-sdk/lib-dynamodb';
 
-import { Migrator } from '../migrator';
-import type { Operations } from '../migrator';
+import { Migrator } from '../../framework/migrator';
+import { Operations } from '../../framework/interfaces/Operations';
+import { DynamodbScriptTracker } from '../../framework/dynamodb-script-tracker';
+
+const ddbClient = new DynamoDBClient({ region: process.env.AWS_REGION });
+
+const documentClient = DynamoDBDocumentClient.from(ddbClient, {
+  marshallOptions: { convertEmptyValues: true, removeUndefinedValues: true },
+});
+
+export const scriptTracker = new DynamodbScriptTracker(documentClient, {
+  scriptName: '{{scriptName}}',
+  scriptStore: 'migration-seed-scripts-table',
+});
 
 const operations: Operations = {
-  read(): Promise<QueryCommandOutput | ScanCommandOutput | ExecuteStatementCommandOutput> {
-    return Promise.resolve({ $metadata: {} });
+  /**
+  * A required read function that retrieves items in chunks.
+  */
+  read: async () => {
+    return { items: [], nextPageToken: null };
   },
-  transform<T>(data: T[]): T[] {
-    return [];
-  },
-  write<T>(data: T): Promise<void> {
-    return Promise.resolve();
+  /**
+  * An optional transform function that applies transformations to an array of items.
+  */
+  transform: (data: any) => data,
+  /**
+  * A required write function that writes a batch of items to a target resource.
+  */
+  write: async (data: any) => {
   },
 };
 
-export const migrator = new Migrator({
-    scriptName: '{{scriptName}}',
-    scriptTable: '',
-}, operations);
+export const migration = new Migrator(scriptTracker, operations, false);
